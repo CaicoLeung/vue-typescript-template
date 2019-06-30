@@ -3,15 +3,15 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Hello Vue!"></HelloWorld>
     <SlotCom message="你好">
-      <template #header
-        >Top</template
-      >
-      <template #main
-        >Middle</template
-      >
-      <template #footer
-        >Bottom</template
-      >
+      <template #header>
+        Top
+      </template>
+      <template #main>
+        Middle
+      </template>
+      <template #footer>
+        Bottom
+      </template>
     </SlotCom>
     <!-- <MyModal v-model="checked" @change="change"></MyModal> -->
   </div>
@@ -31,11 +31,10 @@ import MyModal from "@/components/Modal.vue";
   }
 })
 export default class Home extends Vue {
-  $API: any;
   checked: boolean = false;
   public async getTest() {
     try {
-      const data = await this.$API.test();
+      const data = await this.$api.test();
     } catch (e) {
       throw Error(e);
     }

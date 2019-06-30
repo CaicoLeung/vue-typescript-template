@@ -3,10 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
-import api from "./http/api";
+import {Server} from "./http/api";
 
 Vue.config.productionTip = false;
-Vue.prototype.$API = api;
+Vue.use(Server);
 
 new Vue({
   router,
