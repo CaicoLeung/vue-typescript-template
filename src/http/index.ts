@@ -58,7 +58,7 @@ export default {
   },
   form(url: string, params: any) {
     return new Promise(async resolve => {
-      const response: AxiosResponse = await http.post(url, params);
+      const response: AxiosResponse = await form.post(url, params);
       resolve(response);
     });
   }
