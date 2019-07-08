@@ -52,7 +52,10 @@ export default {
   },
   post(url: string, params: any) {
     return new Promise(async resolve => {
-      const response: AxiosResponse = await http.post(url, qs.stringify(params));
+      const response: AxiosResponse = await http.post(
+        url, 
+        qs.stringify(params)
+      );
       resolve(response);
     });
   },
