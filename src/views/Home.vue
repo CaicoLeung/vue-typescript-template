@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" :src="logo" />
     <HelloWorld msg="Hello Vue!"></HelloWorld>
     <SlotCom message="你好">
       <template #header>
@@ -23,6 +23,7 @@ import Component from "vue-class-component";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import SlotCom from "@/components/SlotCom.vue";
 import MyModal from "@/components/Modal.vue";
+import * as logo from "@/assets/logo.png";
 
 @Component({
   components: {
@@ -32,6 +33,7 @@ import MyModal from "@/components/Modal.vue";
 })
 export default class Home extends Vue {
   checked: boolean = false;
+  logo: any = logo;
   public async getTest() {
     try {
       const data = await this.$api.test();
