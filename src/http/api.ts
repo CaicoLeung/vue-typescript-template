@@ -8,8 +8,8 @@ declare module "vue/types/vue" {
 }
 
 class Api {
-  public test() {
-    return http.get("/users");
+  public test(param?: any) {
+    return http.get("/urldata", param);
   }
 }
 
