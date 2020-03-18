@@ -1,18 +1,13 @@
 import store from "@/store";
 
-export const wechatAuth = async (
-  authUrl: string,
-  device: string,
-  allowShare: boolean
-) => {
+export const wechatAuth = async (authUrl: string, device: string, allowShare: boolean) => {
   const shareConfig = {
     title: "XXXX标题",
     desc: "XXXXX描述",
     link: allowShare ? authUrl : window.location.origin,
     imgUrl: "图片Url"
   };
-  const from_url =
-    device.toLocaleLowerCase() === "ios" ? store.state.entryUrl : authUrl;
+  const from_url = device.toLocaleLowerCase() === "ios" ? store.state.entryUrl : authUrl;
   wx.config({}); // wx.config配置项
   wx.ready(() => {
     wx.updateAppMessageShareData({

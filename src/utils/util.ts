@@ -13,11 +13,7 @@ export function formatTime(date: Date): string {
   const hour = date.getHours();
   const minute = date.getMinutes();
   const second = date.getSeconds();
-  return (
-    [year, month, day].map(formatNumber).join("/") +
-    " " +
-    [hour, minute, second].map(formatNumber).join(":")
-  );
+  return [year, month, day].map(formatNumber).join("/") + " " + [hour, minute, second].map(formatNumber).join(":");
 }
 /**
  * 深度克隆
@@ -64,10 +60,7 @@ export const getSign = function(obj: any, reqMethod: "get" | "post") {
       if (tmpObj.hasOwnProperty(key)) param += `${key}=${tmpObj[key]}&`;
     }
     param = param.slice(0, -1);
-    obj.signature = CryptoJS.HmacSHA1(
-      reqMethod + "&" + param,
-      Config.appkey + "&"
-    ).toString(CryptoJS.enc.Base64);
+    obj.signature = CryptoJS.HmacSHA1(reqMethod + "&" + param, Config.appkey + "&").toString(CryptoJS.enc.Base64);
     obj.c_p = JSON.stringify(obj.c_p);
     return obj;
   } catch (e) {

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <input type="checkbox" :checked="checked" @change="change" />
+    <label>
+      <input type="checkbox" :checked="checked" @change="change" />
+    </label>
     {{ checked }}
   </div>
 </template>
