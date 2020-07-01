@@ -5,22 +5,19 @@ import store from "@/store";
 
 const baseUrl = config.uriPrefix;
 axios.defaults.withCredentials = true;
+axios.defaults.timeout = 5000;
 
 const http = axios.create({
-  timeout: 5000,
   baseURL: baseUrl,
   headers: {
-    "Content-Type": "application/x-www-form-urlencodeed;charset=UTF-8;",
-    "Access-Control-Allow-Origin": "*"
+    "Content-Type": "application/x-www-form-urlencoded"
   }
 });
 
-const form = axios.create({
+const fileService = axios.create({
   timeout: 30000,
-  baseURL: baseUrl,
-  headers: {
-    "Content-Type": "multipart/form-data;"
-  }
+  baseURL: config.fileReqUrl,
+  responseType: "blob"
 });
 
 http.interceptors.request.use(
@@ -34,6 +31,17 @@ http.interceptors.request.use(
   }
 );
 
+fileService.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    const token = localStorage.getItem("token");
+    token && (config.headers.token = token);
+    return config;
+  },
+  (error: any) => {
+    return Promise.reject(error);
+  }
+)
+
 http.interceptors.response.use((response: AxiosResponse) => {
   const { status } = response;
   if ((status >= 200 && status <= 300) || status === 305) {
@@ -44,22 +52,10 @@ http.interceptors.response.use((response: AxiosResponse) => {
 });
 
 export default {
-  get(url: string, params?: any) {
-    return new Promise(async resolve => {
-      const response: AxiosResponse = await http.get(url, { params });
-      resolve(response);
-    });
-  },
-  post(url: string, params: any) {
-    return new Promise(async resolve => {
-      const response: AxiosResponse = await http.post(url, qs.stringify(params));
-      resolve(response);
-    });
-  },
-  form(url: string, params: any) {
-    return new Promise(async resolve => {
-      const response: AxiosResponse = await form.post(url, params);
-      resolve(response);
-    });
-  }
+  get: async <T>(url: string, params?: any): Promise<T> => await (await http.get(url, { params })).data,
+  download: async <T>(url: string, params?: any): Promise<T> => await (await fileService.get(url, { params })).data,
+  post: async <T>(url: string, params: any): Promise<T> => await (await http.post(url, qs.stringify(params))).data,
+  put: async <T>(url: string, params: any): Promise<T> => await (await http.put(url, qs.stringify(params))).data,
+  patch: async <T>(url: string, params: any): Promise<T> => await (await http.patch(url, qs.stringify(params))).data,
+  delete: async <T>(url: string): Promise<T> => await (await http.delete(url)).data
 };

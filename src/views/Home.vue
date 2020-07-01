@@ -9,19 +9,14 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import MyModal from "@/components/Modal.vue";
 import * as logo from "@/assets/logo.png";
 
-@Component({
-  components: {
-    HelloWorld
-  }
-})
+@Component
 export default class Home extends Vue {
-  checked: boolean = false;
-  logo: any = logo;
-  data: string = "加载中...";
+  checked = false;
+  logo = logo;
+  data = "加载中...";
   public async getTest() {
     try {
       const reqParam = {

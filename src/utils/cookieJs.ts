@@ -16,7 +16,7 @@ class CookieJs {
 
   public getCookie(name: string) {
     const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    let arr = document.cookie.match(reg);
+    const arr = document.cookie.match(reg);
     console.log(arr);
     if (Array.isArray(arr) && arr.length) {
       return unescape(arr[2]);
