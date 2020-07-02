@@ -8,9 +8,14 @@ declare module "vue/types/vue" {
 }
 
 class Api {
-  public test(param?: any) {
-    return http.get("/urldata", param);
-  }
+  TestModule = {
+    test: (id: number): Promise<{
+      completed: boolean;
+      id: number;
+      title: string;
+      userId: number;
+    }> => http.get(`/todos/${id}`)
+  };
 }
 
 export const Server = {

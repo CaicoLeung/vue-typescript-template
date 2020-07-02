@@ -24,7 +24,8 @@ export default class Home extends Vue {
         age: 26,
         school: "华南理工大学"
       };
-      this.data = await this.$api.test(reqParam);
+      const { title } = await this.$api.TestModule.test(1);
+      this.data = title;
     } catch (e) {
       throw Error(e);
     }
