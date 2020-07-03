@@ -19,7 +19,7 @@ export function formatTime(date: Date): string {
  * 深度克隆
  */
 export function deepClone(target: any) {
-  let copyed_objs: any[] = [];
+  const copyed_objs: any[] = [];
   function _deepClone(target: any) {
     if (typeof target !== "object" || !target) {
       return target;
@@ -29,7 +29,7 @@ export function deepClone(target: any) {
         return copyed_objs[index].copyTarget;
       }
     }
-    let obj = Array.isArray(target) ? [] : {};
+    const obj = Array.isArray(target) ? [] : {};
     copyed_objs.push({ target: target, copyTarget: obj });
     Object.keys(target).forEach(key => {
       // @ts-ignore
@@ -54,9 +54,9 @@ export const getSign = function(obj: any, reqMethod: "get" | "post") {
       .sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
       .join("");
     //排序进行签名
-    let objAsArray = Object.keys(tmpObj).sort();
+    const objAsArray = Object.keys(tmpObj).sort();
     let param = "";
-    for (let key of objAsArray) {
+    for (const key of objAsArray) {
       if (tmpObj.hasOwnProperty(key)) param += `${key}=${tmpObj[key]}&`;
     }
     param = param.slice(0, -1);

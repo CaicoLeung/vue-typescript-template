@@ -9,7 +9,9 @@ declare module "vue/types/vue" {
 
 class Api {
   TestModule = {
-    test: (id: number): Promise<{
+    test: (
+      id: number
+    ): Promise<{
       completed: boolean;
       id: number;
       title: string;

@@ -40,7 +40,7 @@ fileService.interceptors.request.use(
   (error: any) => {
     return Promise.reject(error);
   }
-)
+);
 
 http.interceptors.response.use((response: AxiosResponse) => {
   const { status } = response;
