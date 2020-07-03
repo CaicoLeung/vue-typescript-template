@@ -3,15 +3,21 @@
     <h1>This is an about page</h1>
     <input type="text" v-model="message" />
     <p>reversedMessage: {{ reversedMessage }}</p>
+    <SlotCom message="xxx" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component, { mixins } from "vue-class-component";
-import { Hello, World } from "@/components/Mixins.js";
+import SlotCom from "@/components/SlotCom.vue";
+import { Hello, World } from "@/components/Mixins.ts";
 
-@Component
+@Component({
+  components: {
+    SlotCom
+  }
+})
 export default class About extends mixins(Hello, World) {
   message = "";
 

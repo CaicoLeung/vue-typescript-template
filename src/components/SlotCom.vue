@@ -1,5 +1,6 @@
 <template>
   <div class="slot-com">
+    <h2>{{ message }}</h2>
     <slot name="header">header部分缺失</slot>
     <hr />
     <slot name="main">main部分缺失</slot>
@@ -13,9 +14,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+
 @Component({
   props: {
-    message: String
+    message: {
+      type: String,
+      required: true
+    }
   }
 })
 export default class SlotCom extends Vue {}
@@ -24,9 +29,9 @@ export default class SlotCom extends Vue {}
 <style lang="scss" scoped>
 .slot-com {
   width: 200px;
-  border: 1px solid rebeccapurple;
+  border: 1px solid #643297;
   border-radius: 10px;
-  color: brown;
+  color: #a52a2a;
   font-size: 16px;
 }
 </style>

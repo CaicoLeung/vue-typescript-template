@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <img alt="Vue logo" :src="logo" />
-    <HelloWorld msg="Hello Vue!"></HelloWorld>
-    <h4>{{ data }}</h4>
+    <h4>{{ response }}</h4>
+    <div>
+      <input type="text" placeholder="自动获取焦点" ref="inputRef" />
+    </div>
   </div>
 </template>
 
@@ -16,8 +18,12 @@ import * as logo from "@/assets/logo.png";
 export default class Home extends Vue {
   checked = false;
   logo = logo;
-  data = "加载中...";
-  public async getTest() {
+  response = "加载中...";
+  $refs!: {
+    inputRef: HTMLInputElement;
+  };
+
+  async getTest() {
     try {
       const reqParam = {
         name: "Caico",
@@ -25,18 +31,19 @@ export default class Home extends Vue {
         school: "华南理工大学"
       };
       const { title } = await this.$api.TestModule.test(1);
-      this.data = title;
+      this.response = title;
     } catch (e) {
       throw Error(e);
     }
   }
 
-  public change(value: boolean) {
+  change(value: boolean) {
     this.checked = value;
   }
 
-  public mounted() {
-    this.getTest();
+  async mounted() {
+    this.$refs.inputRef.focus();
+    await this.getTest();
     this.$cookiejs.setCookie("name", "caico");
     console.log("获取name的cookie值： ", this.$cookiejs.getCookie("name"));
   }
