@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <p>{{ foo }}</p>
+    <button @click="emitHandle">submit</button>
   </div>
 </template>
 
@@ -17,5 +18,9 @@ import Component from "vue-class-component";
     }
   }
 })
-export default class SyncCom extends Vue {}
+export default class SyncCom extends Vue {
+  emitHandle() {
+    this.$emit("update:foo", "更新父组件");
+  }
+}
 </script>

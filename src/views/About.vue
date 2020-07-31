@@ -1,13 +1,12 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <input type="text" v-model="message" @change="emitHandle" />
+    <input type="text" v-model="message" />
     <p>reversedMessage: {{ reversedMessage }}</p>
     <!-- <SlotCom message="xxx">
       <template slot="main">这是Main部分</template>
     </SlotCom> -->
     <SyncCom :foo.sync="message" />
-    <button @click="emitHandle">submit</button>
   </div>
 </template>
 
@@ -35,10 +34,6 @@ export default class About extends mixins(Hello, World) {
       .split("")
       .reverse()
       .join("");
-  }
-
-  emitHandle() {
-    this.$emit("update:foo", this.message);
   }
 }
 </script>
