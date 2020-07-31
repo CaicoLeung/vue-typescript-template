@@ -1,21 +1,26 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <input type="text" v-model="message" />
+    <input type="text" v-model="message" @change="emitHandle" />
     <p>reversedMessage: {{ reversedMessage }}</p>
-    <SlotCom message="xxx" />
+    <!-- <SlotCom message="xxx">
+      <template slot="main">这是Main部分</template>
+    </SlotCom> -->
+    <SyncCom :foo.sync="message" />
+    <button @click="emitHandle">submit</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component, { mixins } from "vue-class-component";
-import SlotCom from "@/components/SlotCom.vue";
+// import SlotCom from "@/components/SlotCom.vue";
+import SyncCom from "@/components/SyncCom.vue";
 import { Hello, World } from "@/components/Mixins.ts";
 
 @Component({
   components: {
-    SlotCom
+    SyncCom
   }
 })
 export default class About extends mixins(Hello, World) {
@@ -31,5 +36,15 @@ export default class About extends mixins(Hello, World) {
       .reverse()
       .join("");
   }
+
+  emitHandle() {
+    this.$emit("update:foo", this.message);
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.about {
+  text-align: center;
+}
+</style>

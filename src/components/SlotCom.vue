@@ -26,8 +26,9 @@ import Component from "vue-class-component";
 export default class SlotCom extends Vue {}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .slot-com {
+  margin: 10px auto;
   width: 200px;
   border: 1px solid #643297;
   border-radius: 10px;
