@@ -5,6 +5,7 @@
     <div>
       <input type="text" placeholder="自动获取焦点" ref="inputRef" v-model="text" />
       <h4>{{ myName }}</h4>
+      <button @click="setMyName(text)">setName</button>
       <h5>{{ count }}</h5>
       <button @click="incrementHandle">+</button>
     </div>
