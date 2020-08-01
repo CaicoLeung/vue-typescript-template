@@ -1,10 +1,10 @@
 import "vue-class-component/hooks";
 import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import "./registerServiceWorker";
-import { Server } from "./http/api";
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
+import "@/registerServiceWorker";
+import { Server } from "@/http/api";
 import { cookieJs } from "@/utils/cookieJs";
 
 Vue.config.productionTip = false;

@@ -3,7 +3,10 @@
     <img alt="Vue logo" :src="logo" />
     <h4>{{ response }}</h4>
     <div>
-      <input type="text" placeholder="自动获取焦点" ref="inputRef" />
+      <input type="text" placeholder="自动获取焦点" ref="inputRef" v-model="text" />
+      <h4>{{ myName }}</h4>
+      <h5>{{ count }}</h5>
+      <button @click="incrementHandle">+</button>
     </div>
   </div>
 </template>
@@ -13,9 +16,17 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import MyModal from "@/components/Modal.vue";
 import * as logo from "@/assets/logo.png";
+import { State, Action, Getter, Mutation, namespace } from "vuex-class";
+
+const profileModule = namespace("profile");
 
 @Component
 export default class Home extends Vue {
+  @State("count") count: undefined;
+  @Mutation("incrementHandle") incrementHandle!: () => void;
+  @profileModule.Getter("getName") myName!: string;
+  @profileModule.Action("setName") setMyName!: (value: string) => void;
+  text = "";
   checked = false;
   logo = logo;
   response = "加载中...";
