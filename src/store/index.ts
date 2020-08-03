@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import profile from "./profile";
-import state from './profile/state';
+import state from "./profile/state";
 
 Vue.use(Vuex);
 
